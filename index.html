@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from taohuang13.github.io/humanoid-standingup.github.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2026 11:24:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning Humanoid Standing-up Control.">
+  <meta name="keywords" content="Humanoid Standing-up Control">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Humanoid Standing-up Control across Diverse Postures</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="../../cdn.jsdelivr.net/gh/jpswalsh/academicons%401/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <!-- <link rel="icon" href="static/images/icon2.png"> -->
+
+  <script src="../../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+
+</nav>
+
+
+<section class="hero">
+  <header class="video-header">
+    <div class="header-background">
+    </div>
+    <!-- <video playsinline autoplay muted loop id="video-bg">
+      <source src="assets/website_background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video> -->
+    <div class="header-content">
+      <h1 style="font-size: 5.25vw;"><b>DexReprise</b></h1>
+      <p style="font-size: 3.5vw"  25em;>Reference-Guided Generalist Dexterous Manipulation from Human Motion and Videos</p>
+      <!-- <br /> -->
+    </div>
+    <!-- Hero footer: will stick at the bottom -->
+    <!-- <div class="hero-foot is-hidden-mobile">
+      <nav class="tabs is-boxed is-fullwidth is-size-5" style="margin-top: 10em;">
+        <ul>
+          <li style="font-size: 0.8vw;"><a href="#outdoor">Outdoor Test</a></li>
+          <li style="font-size: 0.8vw;"><a href="#indoor">Indoor Test</a></li>
+          <li style="font-size: 0.8vw;"><a href="#robustness">Robustness Test</a></li>
+          <li style="font-size: 0.8vw;"><a href="#framework">Framework</a></li>
+        </ul>
+      </nav>
+    </div> -->
+
+  </header>
+  <!-- <div class="video-background">
+    <video autoplay muted loop id="video-bg">
+      <source src="/Users/taou/Documents/Code/host_website/assets/teaser.mp4" type="video/mp4">
+      <source src="your-video-file.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div> -->
+
+  <!-- Header Content Container -->
+  <!-- <header class="header-content">
+    <h1 style="font-size: 100px;">Welcome to My Website</h1>
+    <p style="font-size: 80px;">This is a decoupled video background example.</p>
+  </header> -->
+
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  -->
+
+
+<section class="section">
+  <div class="container is-max-widescreen" style="margin-top: -5em;">
+    <hr width="100%" size="2">
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Overview</h2> -->
+        <!-- <div class="publication-video"> -->
+          <!-- <iframe src="https://www.youtube.com/embed/Yruh-3CFwE4?rel=0&amp;showinfo=0" -->
+                  <!-- frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+        <!-- </div> -->
+      </div>
+    </div>
+    <!--/ Paper video. -->
+    <hr width="100%" size="2">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title">Abstract</h2>
+        <div class="content has-text-justified" >
+          <p>
+            Learning generalist dexterous manipulation policies requires supervision that is both diverse and physically executable, yet collecting such data directly
+            on robots remains costly and labor-intensive. We present DexReprise, a reference guided framework that converts offline human demonstrations into closed-loop
+            dexterous robot behaviors. During training, DexReprise imports existing motion capture datasets as references into simulation, trains trajectory-conditioned rein7 forcement learning experts with a unified reward formulation, and distills their
+            physically grounded rollouts into a single point-cloud-based conditional policy.
+            At test time, the frozen policy conditions on robot observations and a new hand object reference from mocap or video, enabling zero-shot real-world execution
+            without additional policy learning. Experiments on GRAB and ARCTIC, together
+            with real-world evaluations from mocap and video references, show that a single
+            reference-conditioned policy can generalize across diverse human-object trajectories and transfer them to dexterous robot execution.
+          </p>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <img src="assets/teaser.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+  </div>
+</section>
+
+
+<section class="section" id="outdoor">
+  <div class="container is-max-fullhd" style="margin-top: -5em;">
+    <hr width="100%" size="2">
+
+    <div class="container is-max-fullhd" id="indoor">
+      <hr width="100%" size="2">
+      <h2 class="title is-3 has-text-centered">Mocap-Data-Conditioned Real-World Experiments</h2>
+      <div class="columns is-centered">
+  
+        <div class="column">
+          <h2 class="title is-4 has-text-centered">Apple</h2>
+          <div class="columns is-centered">
+            <div class="column content has-text-centered"> <!-- Centered text -->
+              <!-- <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p> -->
+              <video  controls playsinline height="100%" class="rounded-video">
+                <source src="assets/grab_apple_one.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+  
+            <h2 class="title is-4 has-text-centered">Bunny</h2>
+            <div class="columns is-centered">
+              <div class="column content has-text-centered"> <!-- Centered text -->
+                <!-- <p>
+                  As a byproduct of our method, we can also solve the matting problem by ignoring
+                  samples that fall outside of a bounding box during rendering.
+                </p> -->
+                <video  controls playsinline height="100%" class="rounded-video">
+                  <source src="assets/grab_bunny_cut_latest.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+    
+            </div>
+          <!-- </div> -->
+        </div>
+  
+        <div class="column">
+          <h2 class="title is-4 has-text-centered">Camera</h2>
+          <div class="columns is-centered">
+            <div class="column content has-text-centered"> <!-- Centered text -->
+              <!-- <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p> -->
+              <video  controls playsinline height="100%" class="rounded-video">
+                <source src="assets/grab_camera_one.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+  
+        <!-- Matting. -->
+        <!-- <div class="column"> -->
+          <h2 class="title is-4 has-text-centered">Cup</h2>
+          <div class="columns is-centered">
+            <div class="column content has-text-centered"> <!-- Centered text -->
+              <!-- <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p> -->
+              <video  controls playsinline height="100%" class="rounded-video">
+                <source src="assets/grab_cup_one.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+        <!-- </div> -->
+        </div>
+
+        <div class="column">
+        <h2 class="title is-4 has-text-centered">Elephant</h2>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/grab_elephant_one.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <!-- <div class="column"> -->
+        <h2 class="title is-4 has-text-centered">Sphere</h2>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/grab_sphere_one.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+      <!-- </div> -->
+        </div>
+  
+      </div>
+    </div>
+
+
+    <div class="container is-max-fullhd" id="lying">
+      <hr width="100%" size="2">
+      <h2 class="title is-3 has-text-centered">Video-conditioned Real-World Experiments</h2>
+
+    <!-- <h2 class="title is-3 has-text-centered">Standing up in Outdoor Environments</h2> -->
+    <div class="columns is-centered">
+      <!-- Visual Effects. -->
+      <div class="column">
+        <h2 class="title is-4 has-text-centered">Human Video</h2>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/mask_handover.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      <!--/ Visual Effects. -->
+
+        <!-- <h2 class="title is-4 has-text-centered">Lean on Tree</h2> -->
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/mask_apple_bottle.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+        <!-- <h2 class="title is-4 has-text-centered">Stone Road</h2> -->
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/mask_scan.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/mask_pot.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/mask_deliver_pot.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+      </div>
+        
+      <!--/ Visual Effects. -->
+
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-4 has-text-centered">Robot rollout</h2>
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/robot_handover.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+        <!-- <h2 class="title is-4 has-text-centered">Platform</h2> -->
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/robot_pickplace.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+        
+        <!-- <h2 class="title is-4 has-text-centered">Grassland</h2> -->
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/robot_scan.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/robot_pot.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column content has-text-centered"> <!-- Centered text -->
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/video-conditioned/robot_pot_new.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+      <div class="columns is-centered">
+
+  
+
+  
+      </div>
+    </div>
+
+
+    <div class="container is-max-fullhd" >
+      <hr width="100%" size="2">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+  <div class="container is-max-fullhd" style="margin-top: -5em;">
+    <hr width="100%" size="2">
+    <!-- method. -->
+    <div class="columns is-centered has-text-centered" id="framework">
+      <div class="column is-four-fifths">
+        <h2 class="title">Framework</h2>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <video  controls playsinline height="100%" class="rounded-video">
+              <source src="assets/method.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="content has-text-justified" >
+          <p>
+            DexReprise consists of three key components: (1) RL expert training from mocap data, (2) Conditional generalist policy distillation and (3) Sim-to-real transfer.
+          </p>
+          <ul>
+            <li><b>RL Expert Training from Mocap Data.</b> We first convert mocap sequences into robot-compatible references. Then we train state-based trajectory-conditioned RL experts with a careful-designed reward function.</li>
+            <li><b>Conditional Generalist Policy Distillation.</b> We use state-based RL experts as teachers and distill their rollouts into a single deployable point-cloud policy that can follow different reference trajectories from visual observations. We use DP3-style diffusion policy with PointNet++ as point-cloud encoders.</li>
+            <li><b>Sim-to-real Transfer.</b> We use WiLoR to obtain hand conditions while using FoundationPose for object positions. To obtain clean object mesh files, we use Grounding-SAM to segment RGB images with appropriate text prompts, subsequently we use InstantMesh to reconstruct the mesh files of objects.  After this initialization step, the policy does not rely on continuous object pose tracking. Instead, it executes the task in a closed-loop manner using robot proprioception and the point-cloud observation from the ego camera.</li>
+          </ul>  
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container is-centered" >
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8 is-centered">
+        <div class="content is-centered">
+          <p>
+            This website is borrowed from <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a
+            href="https://umi-on-legs.github.io/">UMI-On-Legs</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+<!-- Mirrored from taohuang13.github.io/humanoid-standingup.github.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2026 11:27:35 GMT -->
+</html>
