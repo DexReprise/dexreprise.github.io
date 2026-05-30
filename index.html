@@ -91,10 +91,7 @@
   <header class="video-header">
     <div class="header-background">
     </div>
-    <!-- <video playsinline autoplay muted loop id="video-bg">
-      <source src="assets/website_background.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video> -->
+    <img id="video-bg" src="assets/title.png" alt="">
     <div class="header-content">
       <h1 style="font-size: 5.25vw;"><b>DexReprise</b></h1>
       <p style="font-size: 3.5vw"  25em;>Reference-Guided Generalist Dexterous Manipulation from Human Motion and Videos</p>
@@ -236,7 +233,7 @@
           <p>
             Learning generalist dexterous manipulation policies requires supervision that is both diverse and physically executable, yet collecting such data directly
             on robots remains costly and labor-intensive. We present DexReprise, a reference guided framework that converts offline human demonstrations into closed-loop
-            dexterous robot behaviors. During training, DexReprise imports existing motion capture datasets as references into simulation, trains trajectory-conditioned rein7 forcement learning experts with a unified reward formulation, and distills their
+            dexterous robot behaviors. During training, DexReprise imports existing motion capture datasets as references into simulation, trains trajectory-conditioned reinforcement learning experts with a unified reward formulation, and distills their
             physically grounded rollouts into a single point-cloud-based conditional policy.
             At test time, the frozen policy conditions on robot observations and a new hand object reference from mocap or video, enabling zero-shot real-world execution
             without additional policy learning. Experiments on GRAB and ARCTIC, together
